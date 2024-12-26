@@ -1,0 +1,11 @@
+.venv/
+experiments/
+output/
+input/
+temp/
+.idea/
+source/data_storage/
+source/human_query/
+source/summerization
+source/application.py
+.env
