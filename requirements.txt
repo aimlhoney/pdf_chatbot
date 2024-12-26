@@ -127,7 +127,7 @@ nest-asyncio==1.6.0
 networkx==3.4.2
 notebook==7.3.2
 notebook_shim==0.2.4
-numpy==1.26.4
+numpy
 oauthlib==3.2.2
 onnxruntime==1.20.1
 openai==1.58.1
