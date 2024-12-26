@@ -1,4 +1,5 @@
 # Assuming `splits` contains the list of Document objects
+from langchain_google_genai._common import GoogleGenerativeAIError
 from pydantic_settings import BaseSettings
 from dotenv import main
 import os
@@ -12,8 +13,11 @@ sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 from langchain_community.vectorstores import Chroma
 
 def get_embedding_storage(api_key: SecretStr, splits, k=3, model="models/embedding-001"):
-    return Chroma.from_documents(
-        documents=splits,
-        embedding=GoogleGenerativeAIEmbeddings(model=model, google_api_key=api_key)
-        # Directory for storing Chroma's data
-    ).as_retriever(search_kwargs={"k": k})
+    try:
+        return Chroma.from_documents(
+            documents=splits,
+            embedding=GoogleGenerativeAIEmbeddings(model=model, google_api_key=api_key)
+            # Directory for storing Chroma's data
+        ).as_retriever(search_kwargs={"k": k})
+    except GoogleGenerativeAIError:
+        raise Exception("Google Generative AI is not available")
