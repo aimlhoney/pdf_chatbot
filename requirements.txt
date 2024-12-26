@@ -27,7 +27,6 @@ certifi==2024.12.14
 cffi==1.17.1
 charset-normalizer==3.4.0
 Chroma==0.2.0
-chroma-hnswlib==0.7.6
 chromadb==0.3.2
 click==8.1.8
 colorama==0.4.6
