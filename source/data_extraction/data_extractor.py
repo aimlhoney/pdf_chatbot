@@ -7,11 +7,11 @@ def get_table_json_using_page_no(path, page_no):
     try:
         tables = tabula.read_pdf(path, stream=True,  pages=page_no)
         if not tables:
-            return {"tables": ""}
+            return "tables" + " "
         else:
-            return {"tables": '\n'.join([df.to_json(orient='records') for df in tables])}
+            return "tables" + '\n'.join([df.to_json(orient='records') for df in tables])
     except CalledProcessError:
-        return {"tables": ""}
+        return "tables" + " "
 
 def get_splitter(chunk_size = 1000, overlap = 150):
     return RecursiveCharacterTextSplitter(
@@ -24,7 +24,7 @@ def get_pages(path):
     pages = loader.load()
     for index, page in enumerate(pages):
         contents = page.page_content
-        page.page_content = {"body": contents, "tables": get_table_json_using_page_no(path, index + 1)}
+        page.page_content = "body -- " + contents + " -- tables -- "+ get_table_json_using_page_no(path, index + 1)
     return pages
 
 
